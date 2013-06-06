@@ -13,6 +13,9 @@ def convert(inputLine):
 		binaryChars.append(WHITESPACE_TO_NUMERALS[char])
 
 	charString = ''.join(binaryChars)
+	if not charString:
+		return ''
+
 	hiddenNumber = int(charString, 2)
 	return LETTERS[hiddenNumber]
 
