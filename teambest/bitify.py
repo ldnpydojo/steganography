@@ -17,5 +17,5 @@ def unbitify(generator):
 			byte >>= 1
 			byte |= bit << 7
 		result.append(chr(byte))
-	return json.loads("".join(result))
+	return json.raw_decode("".join(result))
 

@@ -1,5 +1,6 @@
 from PIL import Image
 import numpy
+import bitify
 
 
 def encode(in_file, secret_data, out_file):
@@ -13,8 +14,8 @@ def encode(in_file, secret_data, out_file):
     for i in range(len(data)):
         data[i] = data[i] & 0b11111110
 
-    for i in range(len(secret_data)):
-        data[i] = data[i] | secret_data[i]
+    for i,x in enumerate(secret_data):
+        data[i] = data[i] | x
 
     data = numpy.array(data, dtype=numpy.uint8).reshape(h, w, channels)
     Image.fromarray(data).save(out_file)
@@ -28,13 +29,12 @@ def decode(in_file):
     data = data.reshape(h * w * channels)
     data = list(data)
 
-    for i in range(len(data)):
-        yield data[i] & 0b00000001
+    for x in data:
+        yield x & 0b00000001
 
 
 if __name__ == "__main__":
-    secret_data = [0,1,0,1,1,1,1,1,0,0,0,1,0,1,1,1,0]
-    print secret_data
+    secret_data = bitify.bitify("whatever")
     encode("image1.jpg", secret_data, "image2.png")
 
-    print list(decode("image2.png"))[:len(secret_data)]
+    print bitify.unbitify(decode("image2.png"))
