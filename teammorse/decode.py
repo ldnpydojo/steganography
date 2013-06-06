@@ -5,7 +5,7 @@ from constants import LETTERS
 def generateLines(inputFile):
 	for line in inputFile:
 		if line.strip() == '':
-			yield line
+			yield line.strip('\r\n')
 
 def convert(inputLine):
 	binaryChars = []
