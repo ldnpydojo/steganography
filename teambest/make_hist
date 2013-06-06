@@ -1,0 +1,1 @@
+python hist.py | xargs -n10 ./spark
