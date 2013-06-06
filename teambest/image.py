@@ -34,7 +34,7 @@ def decode(in_file):
 
 
 if __name__ == "__main__":
-    secret_data = bitify.bitify("whatever")
+    secret_data = bitify.bitify('that\'s very secret, don\'t look')
     encode("image1.jpg", secret_data, "image2.png")
 
     print bitify.unbitify(decode("image2.png"))
